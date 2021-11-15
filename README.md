@@ -17,3 +17,6 @@ x.x.x.x/22 within the large csv
 x.x.x.x/23 within the medium csv
 x.x.x.x/24 within the small csv 
 
+The main objective is a simple idea of obtaining IP data, albeit I havent tested the reverse .
+
+Also note endpoints are created here so ensure you destroy if not required
