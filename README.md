@@ -19,4 +19,8 @@ x.x.x.x/24 within the small csv
 
 The main objective is a simple idea of obtaining IP data, albeit I havent tested the reverse .
 
+It uses basic iteration to read from a list, the remove the entry so on next read is the next on the list etc.
+
+You need to update the py file with the S3 bucket name you have, and also allow lambda the permissions for interaction
+
 Also note endpoints are created here so ensure you destroy if not required
