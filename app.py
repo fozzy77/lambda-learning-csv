@@ -9,7 +9,7 @@ import csv
 from pprint import pprint
 from tempfile import NamedTemporaryFile
 
-
+unique_bucket = os.environ['unique_bucket']
 
 
 ## Invoke the boto3 ec2 clinet for AWS related calls
@@ -20,11 +20,22 @@ s3 = boto3.client("s3")
 ## Define the lambda handler using the standard default name
 
 def lambda_handler(event, context):
-    
+    print("The Whole message event")
+    print(event)
     
     ### variable to be sourced from event
-    vpc_size = event['size']
-    
+    messages = event['Records']
+    print("The Records dictionary from the whole message")
+    print(messages)
+    for message in messages :
+        messageData = {
+        'body': message['body']
+        }
+    print("The Element we have focused on for a variable input")
+    print(messageData)
+    vpc_size = messageData['body']
+ 
+ 
     azs = ["eu-west-2a", "eu-west-2b", "eu-west-2c"]
     
     if vpc_size == "small":
@@ -43,12 +54,12 @@ def lambda_handler(event, context):
         print("Incorrect VPC size defined")
         exit(1)
 
-    obj = s3.get_object(Bucket='<bucketname_where_csvs_are_held>', Key=subnet_csv)
+    obj = s3.get_object(Bucket=unique_bucket, Key=subnet_csv)
     print(obj)
     content = obj['Body'].read().decode('utf-8')
     print(content)
     
-    s3.download_file('bucketname_where_csvs_are_held', subnet_csv, '/tmp/tmp-example.csv')
+    s3.download_file(unique_bucket, subnet_csv, '/tmp/tmp-example.csv')
     list_dir = os.listdir('/tmp')
     print("List of tmp directory")
     print(list_dir)
@@ -82,7 +93,7 @@ def lambda_handler(event, context):
             print(csv_writer)
         
 
-    s3.upload_file('/tmp/tmp-update.csv', 'bucketname_where_csvs_are_held', subnet_csv )
+    s3.upload_file('/tmp/tmp-update.csv', unique_bucket, subnet_csv )
 
 ### variable to be set by call to IPAM solution
     supernet = stripped_cidr
@@ -262,15 +273,15 @@ def lambda_handler(event, context):
 
 ### Adding a default Security Group
 
-    s3_gate_endpoint = ec2.create_vpc_endpoint(
-    VpcEndpointType='Gateway',
-    VpcId=vpcid,
-    ServiceName='com.amazonaws.eu-west-2.s3',
-    RouteTableIds=[
-        privaterttableid,
-    ],
-    PrivateDnsEnabled=False,
-    )
-    print(s3_gate_endpoint)
+ #   s3_gate_endpoint = ec2.create_vpc_endpoint(
+ #   VpcEndpointType='Gateway',
+ #   VpcId=vpcid,
+ #   ServiceName='com.amazonaws.eu-west-2.s3',
+ #   RouteTableIds=[
+ #       privaterttableid,
+ #   PrivateDnsEnabled=False,
+ #   ],
+ #   )
+ #   print(s3_gate_endpoint)
 
-### Adding Local S3 endpoint
+### Adding Local S3 endpoint### Adding Local S3 endpoint
