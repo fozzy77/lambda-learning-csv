@@ -1,0 +1,39 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "VisualEditor0",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:AttachClassicLinkVpc",
+                "ec2:CreateTags",
+                "ec2:CreateVpc",
+                "ec2:CreateLocalGatewayRouteTableVpcAssociation",
+                "ec2:DescribeVpcEndpointServices",
+                "ec2:AssociateVpcCidrBlock",
+                "ec2:CreateVpcEndpointServiceConfiguration",
+                "ec2:CreateTransitGatewayVpcAttachment",
+                "ec2:CreateDefaultVpc",
+                "ec2:GetSecurityGroupsForVpc",
+                "ec2:DescribeVpcs",
+                "ec2:DescribeVpcEndpoints",
+                "ec2:DeleteVpc",
+                "ec2:CreateVpcPeeringConnection",
+                "ec2:CreateSubnet",
+                "ec2:CreateSubnetCidrReservation",
+                "ec2:CreateDefaultSubnet",
+                "ec2:AssociateSubnetCidrBlock",
+                "ec2:CreateLocalGatewayRouteTable",
+                "ec2:CreateRoute",
+                "ec2:CreateRouteTable",
+                "ec2:CreateNetworkAcl",
+                "ec2:CreateNetworkAclEntry",
+                "ec2:DescribeNetworkAcls",
+                "ec2:ReplaceNetworkAclAssociation",
+                "ec2:AssociateRouteTable",
+                "ec2:CreateSecurityGroup"
+            ],
+            "Resource": "*"
+        }
+    ]
+}
